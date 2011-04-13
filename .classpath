@@ -55,5 +55,6 @@
 	<classpathentry kind="lib" path="lib/nimbus-snapshot-20090514.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="lib/jasperreports-3.7.1.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/MySQL"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

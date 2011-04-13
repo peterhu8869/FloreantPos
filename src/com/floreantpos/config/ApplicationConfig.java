@@ -55,7 +55,7 @@ public class ApplicationConfig {
 	}
 
 	public static String getConnectionURL() {
-		return "jdbc:derby://" + getDatabaseURL() + ":" + getDatabasePort() + "/" + getDatabaseName(); 
+		return "jdbc:mysql://" + getDatabaseURL() + ":" + getDatabasePort() + "/" + getDatabaseName(); 
 	}
 	
 	public static void setDatabaseURL(String url) {
@@ -63,7 +63,7 @@ public class ApplicationConfig {
 	}
 	
 	public static String getDatabasePort() {
-		return pref.get(DATABASE_PORT, "1527");
+		return pref.get(DATABASE_PORT, "3306");
 	}
 	
 	public static void setDatabasePort(String port) {
@@ -95,7 +95,7 @@ public class ApplicationConfig {
 	}
 	
 	public static boolean checkDatabaseConnection(String url, String port, String databaseName, String user, String password) {
-		url = "jdbc:derby://" + url + ":" + port + "/" + databaseName; 
+		url = "jdbc:mysql://" + url + ":" + port + "/" + databaseName; 
 		
 		new ClientDriver();
 		Connection connection = null; 
