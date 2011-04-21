@@ -95,14 +95,18 @@ public class ApplicationConfig {
 	}
 	
 	public static boolean checkDatabaseConnection(String url, String port, String databaseName, String user, String password) {
-		url = "jdbc:mysql://" + url + ":" + port + "/" + databaseName; 
+		url = "jdbc:mysql://" + url + ":" + port + "/" + databaseName;
 		
-		new ClientDriver();
 		Connection connection = null; 
 		try {
+			Class.forName("com.mysql.jdbc.Driver");
 			connection = DriverManager.getConnection(url, user, password);
 			return true;
 		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
 			return false;
 		} finally {
 			try {
