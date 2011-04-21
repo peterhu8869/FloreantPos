@@ -1,0 +1,1153 @@
+-- MySQL dump 10.13  Distrib 5.5.10, for Win32 (x86)
+--
+-- Host: localhost    Database: posdb
+-- ------------------------------------------------------
+-- Server version	5.5.10
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `action_history`
+--
+
+DROP TABLE IF EXISTS `action_history`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `action_history` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `ACTION_TIME` datetime DEFAULT NULL,
+  `ACTION_NAME` varchar(255) DEFAULT NULL,
+  `DESCRIPTION` varchar(255) DEFAULT NULL,
+  `USER_ID` int(11) DEFAULT NULL,
+  PRIMARY KEY (`ID`),
+  KEY `FK3F3AF36B3E20AD51` (`USER_ID`),
+  CONSTRAINT `FK3F3AF36B3E20AD51` FOREIGN KEY (`USER_ID`) REFERENCES `users` (`AUTO_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `action_history`
+--
+
+LOCK TABLES `action_history` WRITE;
+/*!40000 ALTER TABLE `action_history` DISABLE KEYS */;
+/*!40000 ALTER TABLE `action_history` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `attendence_history`
+--
+
+DROP TABLE IF EXISTS `attendence_history`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `attendence_history` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `CLOCK_IN_TIME` datetime DEFAULT NULL,
+  `CLOCK_OUT_TIME` datetime DEFAULT NULL,
+  `CLOCK_IN_HOUR` smallint(6) DEFAULT NULL,
+  `CLOCK_OUT_HOUR` smallint(6) DEFAULT NULL,
+  `CLOCKED_OUT` bit(1) DEFAULT NULL,
+  `USER_ID` int(11) DEFAULT NULL,
+  `SHIFT_ID` int(11) DEFAULT NULL,
+  `TERMINAL_ID` int(11) DEFAULT NULL,
+  PRIMARY KEY (`ID`),
+  KEY `FKDFE829A7660A5E3` (`SHIFT_ID`),
+  KEY `FKDFE829A2AD2D031` (`TERMINAL_ID`),
+  KEY `FKDFE829A3E20AD51` (`USER_ID`),
+  CONSTRAINT `FKDFE829A2AD2D031` FOREIGN KEY (`TERMINAL_ID`) REFERENCES `terminal` (`ID`),
+  CONSTRAINT `FKDFE829A3E20AD51` FOREIGN KEY (`USER_ID`) REFERENCES `users` (`AUTO_ID`),
+  CONSTRAINT `FKDFE829A7660A5E3` FOREIGN KEY (`SHIFT_ID`) REFERENCES `shift` (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `attendence_history`
+--
+
+LOCK TABLES `attendence_history` WRITE;
+/*!40000 ALTER TABLE `attendence_history` DISABLE KEYS */;
+/*!40000 ALTER TABLE `attendence_history` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `cash_drawer_reset_history`
+--
+
+DROP TABLE IF EXISTS `cash_drawer_reset_history`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `cash_drawer_reset_history` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `RESET_TIME` datetime DEFAULT NULL,
+  `USER_ID` int(11) DEFAULT NULL,
+  PRIMARY KEY (`ID`),
+  KEY `FK719418223E20AD51` (`USER_ID`),
+  CONSTRAINT `FK719418223E20AD51` FOREIGN KEY (`USER_ID`) REFERENCES `users` (`AUTO_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `cash_drawer_reset_history`
+--
+
+LOCK TABLES `cash_drawer_reset_history` WRITE;
+/*!40000 ALTER TABLE `cash_drawer_reset_history` DISABLE KEYS */;
+/*!40000 ALTER TABLE `cash_drawer_reset_history` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `cooking_instruction`
+--
+
+DROP TABLE IF EXISTS `cooking_instruction`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `cooking_instruction` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `DESCRIPTION` varchar(60) DEFAULT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `cooking_instruction`
+--
+
+LOCK TABLES `cooking_instruction` WRITE;
+/*!40000 ALTER TABLE `cooking_instruction` DISABLE KEYS */;
+/*!40000 ALTER TABLE `cooking_instruction` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `coupon_and_discount`
+--
+
+DROP TABLE IF EXISTS `coupon_and_discount`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `coupon_and_discount` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `NAME` varchar(30) DEFAULT NULL,
+  `TYPE` int(11) DEFAULT NULL,
+  `VALUE` double DEFAULT NULL,
+  `EXPIRY_DATE` datetime DEFAULT NULL,
+  `DISABLED` bit(1) DEFAULT NULL,
+  `NEVER_EXPIRE` bit(1) DEFAULT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `coupon_and_discount`
+--
+
+LOCK TABLES `coupon_and_discount` WRITE;
+/*!40000 ALTER TABLE `coupon_and_discount` DISABLE KEYS */;
+/*!40000 ALTER TABLE `coupon_and_discount` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `drawer_pull_report`
+--
+
+DROP TABLE IF EXISTS `drawer_pull_report`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `drawer_pull_report` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `REPORT_TIME` datetime DEFAULT NULL,
+  `REG` varchar(15) DEFAULT NULL,
+  `TICKET_COUNT` int(11) DEFAULT NULL,
+  `BEGIN_CASH` double DEFAULT NULL,
+  `NET_SALES` double DEFAULT NULL,
+  `SALES_TAX` double DEFAULT NULL,
+  `CASH_TAX` double DEFAULT NULL,
+  `TOTAL_REVENUE` double DEFAULT NULL,
+  `GROSS_RECEIPTS` double DEFAULT NULL,
+  `GIFTCERTRETURNCOUNT` int(11) DEFAULT NULL,
+  `GIFTCERTRETURNAMOUNT` double DEFAULT NULL,
+  `GIFTCERTCHANGEAMOUNT` double DEFAULT NULL,
+  `CASH_RECEIPT_NO` int(11) DEFAULT NULL,
+  `CASH_RECEIPT_AMOUNT` double DEFAULT NULL,
+  `CREDIT_CARD_RECEIPT_NO` int(11) DEFAULT NULL,
+  `CREDIT_CARD_RECEIPT_AMOUNT` double DEFAULT NULL,
+  `DEBIT_CARD_RECEIPT_NO` int(11) DEFAULT NULL,
+  `DEBIT_CARD_RECEIPT_AMOUNT` double DEFAULT NULL,
+  `RECEIPT_DIFFERENTIAL` double DEFAULT NULL,
+  `CASH_BACK` double DEFAULT NULL,
+  `CASH_TIPS` double DEFAULT NULL,
+  `CHARGED_TIPS` double DEFAULT NULL,
+  `TIPS_PAID` double DEFAULT NULL,
+  `TIPS_DIFFERENTIAL` double DEFAULT NULL,
+  `PAY_OUT_NO` int(11) DEFAULT NULL,
+  `PAY_OUT_AMOUNT` double DEFAULT NULL,
+  `DRAWER_BLEED_NO` int(11) DEFAULT NULL,
+  `DRAWER_BLEED_AMOUNT` double DEFAULT NULL,
+  `DRAWER_ACCOUNTABLE` double DEFAULT NULL,
+  `CASH_TO_DEPOSIT` double DEFAULT NULL,
+  `VARIANCE` double DEFAULT NULL,
+  `totalVoidWst` double DEFAULT NULL,
+  `totalVoid` double DEFAULT NULL,
+  `totalDiscountCount` int(11) DEFAULT NULL,
+  `totalDiscountAmount` double DEFAULT NULL,
+  `totalDiscountSales` double DEFAULT NULL,
+  `totalDiscountGuest` int(11) DEFAULT NULL,
+  `totalDiscountPartySize` int(11) DEFAULT NULL,
+  `totalDiscountCheckSize` int(11) DEFAULT NULL,
+  `totalDiscountPercentage` double DEFAULT NULL,
+  `totalDiscountRatio` double DEFAULT NULL,
+  `TERMINAL_ID` int(11) DEFAULT NULL,
+  PRIMARY KEY (`ID`),
+  KEY `FKAEC362202AD2D031` (`TERMINAL_ID`),
+  CONSTRAINT `FKAEC362202AD2D031` FOREIGN KEY (`TERMINAL_ID`) REFERENCES `terminal` (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `drawer_pull_report`
+--
+
+LOCK TABLES `drawer_pull_report` WRITE;
+/*!40000 ALTER TABLE `drawer_pull_report` DISABLE KEYS */;
+/*!40000 ALTER TABLE `drawer_pull_report` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `gratuity`
+--
+
+DROP TABLE IF EXISTS `gratuity`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `gratuity` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `MODIFIED_TIME` datetime NOT NULL,
+  `AMOUNT` double DEFAULT NULL,
+  `PAID` bit(1) DEFAULT NULL,
+  `TICKET_ID` int(11) DEFAULT NULL,
+  `OWNER_ID` int(11) DEFAULT NULL,
+  `TERMINAL_ID` int(11) DEFAULT NULL,
+  PRIMARY KEY (`ID`),
+  KEY `FK34E4E3772AD2D031` (`TERMINAL_ID`),
+  KEY `FK34E4E3771DF2D7F1` (`TICKET_ID`),
+  KEY `FK34E4E377AA075D69` (`OWNER_ID`),
+  CONSTRAINT `FK34E4E3771DF2D7F1` FOREIGN KEY (`TICKET_ID`) REFERENCES `ticket` (`ID`),
+  CONSTRAINT `FK34E4E3772AD2D031` FOREIGN KEY (`TERMINAL_ID`) REFERENCES `terminal` (`ID`),
+  CONSTRAINT `FK34E4E377AA075D69` FOREIGN KEY (`OWNER_ID`) REFERENCES `users` (`AUTO_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `gratuity`
+--
+
+LOCK TABLES `gratuity` WRITE;
+/*!40000 ALTER TABLE `gratuity` DISABLE KEYS */;
+/*!40000 ALTER TABLE `gratuity` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `menu_category`
+--
+
+DROP TABLE IF EXISTS `menu_category`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `menu_category` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `MODIFIED_TIME` datetime NOT NULL,
+  `NAME` varchar(20) NOT NULL,
+  `VISIBLE` bit(1) DEFAULT NULL,
+  `BEVERAGE` bit(1) DEFAULT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `menu_category`
+--
+
+LOCK TABLES `menu_category` WRITE;
+/*!40000 ALTER TABLE `menu_category` DISABLE KEYS */;
+/*!40000 ALTER TABLE `menu_category` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `menu_group`
+--
+
+DROP TABLE IF EXISTS `menu_group`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `menu_group` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `MODIFIED_TIME` datetime NOT NULL,
+  `NAME` varchar(20) NOT NULL,
+  `VISIBLE` bit(1) DEFAULT NULL,
+  `CATEGORY_ID` int(11) DEFAULT NULL,
+  `MENU_CATEGORY_ID` int(11) DEFAULT NULL,
+  PRIMARY KEY (`ID`),
+  KEY `FK4DC1AB7F96FBDD10` (`MENU_CATEGORY_ID`),
+  KEY `FK4DC1AB7F2E347FF0` (`CATEGORY_ID`),
+  CONSTRAINT `FK4DC1AB7F2E347FF0` FOREIGN KEY (`CATEGORY_ID`) REFERENCES `menu_category` (`ID`),
+  CONSTRAINT `FK4DC1AB7F96FBDD10` FOREIGN KEY (`MENU_CATEGORY_ID`) REFERENCES `menu_category` (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `menu_group`
+--
+
+LOCK TABLES `menu_group` WRITE;
+/*!40000 ALTER TABLE `menu_group` DISABLE KEYS */;
+/*!40000 ALTER TABLE `menu_group` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `menu_item`
+--
+
+DROP TABLE IF EXISTS `menu_item`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `menu_item` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `MODIFIED_TIME` datetime NOT NULL,
+  `NAME` varchar(30) NOT NULL,
+  `PRICE` double NOT NULL,
+  `DISCOUNT_RATE` double DEFAULT NULL,
+  `VISIBLE` bit(1) DEFAULT NULL,
+  `GROUP_ID` int(11) DEFAULT NULL,
+  `TAX_ID` int(11) DEFAULT NULL,
+  PRIMARY KEY (`ID`),
+  KEY `FK4CD5A1F35188AA24` (`GROUP_ID`),
+  KEY `FK4CD5A1F3A4802F83` (`TAX_ID`),
+  CONSTRAINT `FK4CD5A1F35188AA24` FOREIGN KEY (`GROUP_ID`) REFERENCES `menu_group` (`ID`),
+  CONSTRAINT `FK4CD5A1F3A4802F83` FOREIGN KEY (`TAX_ID`) REFERENCES `tax` (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `menu_item`
+--
+
+LOCK TABLES `menu_item` WRITE;
+/*!40000 ALTER TABLE `menu_item` DISABLE KEYS */;
+/*!40000 ALTER TABLE `menu_item` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `menu_modifier`
+--
+
+DROP TABLE IF EXISTS `menu_modifier`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `menu_modifier` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `MODIFIED_TIME` datetime NOT NULL,
+  `NAME` varchar(20) DEFAULT NULL,
+  `PRICE` double DEFAULT NULL,
+  `EXTRA_PRICE` double DEFAULT NULL,
+  `ENABLE` bit(1) DEFAULT NULL,
+  `PRINT_TO_KITCHEN` bit(1) DEFAULT NULL,
+  `GROUP_ID` int(11) DEFAULT NULL,
+  `TAX_ID` int(11) DEFAULT NULL,
+  PRIMARY KEY (`ID`),
+  KEY `FK59B6B1B75E0C7B8D` (`GROUP_ID`),
+  KEY `FK59B6B1B7A4802F83` (`TAX_ID`),
+  CONSTRAINT `FK59B6B1B75E0C7B8D` FOREIGN KEY (`GROUP_ID`) REFERENCES `menu_modifier_group` (`ID`),
+  CONSTRAINT `FK59B6B1B7A4802F83` FOREIGN KEY (`TAX_ID`) REFERENCES `tax` (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `menu_modifier`
+--
+
+LOCK TABLES `menu_modifier` WRITE;
+/*!40000 ALTER TABLE `menu_modifier` DISABLE KEYS */;
+/*!40000 ALTER TABLE `menu_modifier` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `menu_modifier_group`
+--
+
+DROP TABLE IF EXISTS `menu_modifier_group`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `menu_modifier_group` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `MODIFIED_TIME` datetime NOT NULL,
+  `NAME` varchar(60) DEFAULT NULL,
+  `ENABLED` bit(1) DEFAULT NULL,
+  `EXCLUSIVED` bit(1) DEFAULT NULL,
+  `REQUIRED` bit(1) DEFAULT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `menu_modifier_group`
+--
+
+LOCK TABLES `menu_modifier_group` WRITE;
+/*!40000 ALTER TABLE `menu_modifier_group` DISABLE KEYS */;
+/*!40000 ALTER TABLE `menu_modifier_group` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `menuitem_modifiergroup`
+--
+
+DROP TABLE IF EXISTS `menuitem_modifiergroup`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `menuitem_modifiergroup` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `MODIFIED_TIME` datetime NOT NULL,
+  `MIN_QUANTITY` int(11) DEFAULT NULL,
+  `MAX_QUANTITY` int(11) DEFAULT NULL,
+  `MODIFIER_GROUP` int(11) DEFAULT NULL,
+  `MENU_ITEM` int(11) DEFAULT NULL,
+  `MENUITEM_MODIFIERGROUP_ID` int(11) DEFAULT NULL,
+  `GR_ORDER` int(11) DEFAULT NULL,
+  PRIMARY KEY (`ID`),
+  KEY `FK312B355B64931EFC` (`MENU_ITEM`),
+  KEY `FK312B355B6E7B8B68` (`MENUITEM_MODIFIERGROUP_ID`),
+  KEY `FK312B355B40FDA3C9` (`MODIFIER_GROUP`),
+  CONSTRAINT `FK312B355B40FDA3C9` FOREIGN KEY (`MODIFIER_GROUP`) REFERENCES `menu_modifier_group` (`ID`),
+  CONSTRAINT `FK312B355B64931EFC` FOREIGN KEY (`MENU_ITEM`) REFERENCES `menu_item` (`ID`),
+  CONSTRAINT `FK312B355B6E7B8B68` FOREIGN KEY (`MENUITEM_MODIFIERGROUP_ID`) REFERENCES `menu_item` (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `menuitem_modifiergroup`
+--
+
+LOCK TABLES `menuitem_modifiergroup` WRITE;
+/*!40000 ALTER TABLE `menuitem_modifiergroup` DISABLE KEYS */;
+/*!40000 ALTER TABLE `menuitem_modifiergroup` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `menuitem_shift`
+--
+
+DROP TABLE IF EXISTS `menuitem_shift`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `menuitem_shift` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `SHIFT_PRICE` double DEFAULT NULL,
+  `SHIFT_ID` int(11) DEFAULT NULL,
+  `MENUITEM_ID` int(11) DEFAULT NULL,
+  `SHIFT_ORDER` int(11) DEFAULT NULL,
+  PRIMARY KEY (`ID`),
+  KEY `FKE03C92D57660A5E3` (`SHIFT_ID`),
+  KEY `FKE03C92D533662891` (`MENUITEM_ID`),
+  CONSTRAINT `FKE03C92D533662891` FOREIGN KEY (`MENUITEM_ID`) REFERENCES `menu_item` (`ID`),
+  CONSTRAINT `FKE03C92D57660A5E3` FOREIGN KEY (`SHIFT_ID`) REFERENCES `shift` (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `menuitem_shift`
+--
+
+LOCK TABLES `menuitem_shift` WRITE;
+/*!40000 ALTER TABLE `menuitem_shift` DISABLE KEYS */;
+/*!40000 ALTER TABLE `menuitem_shift` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `payout_reasons`
+--
+
+DROP TABLE IF EXISTS `payout_reasons`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `payout_reasons` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `REASON` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `payout_reasons`
+--
+
+LOCK TABLES `payout_reasons` WRITE;
+/*!40000 ALTER TABLE `payout_reasons` DISABLE KEYS */;
+/*!40000 ALTER TABLE `payout_reasons` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `payout_recepients`
+--
+
+DROP TABLE IF EXISTS `payout_recepients`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `payout_recepients` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `NAME` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `payout_recepients`
+--
+
+LOCK TABLES `payout_recepients` WRITE;
+/*!40000 ALTER TABLE `payout_recepients` DISABLE KEYS */;
+/*!40000 ALTER TABLE `payout_recepients` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `printer_configuration`
+--
+
+DROP TABLE IF EXISTS `printer_configuration`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `printer_configuration` (
+  `ID` int(11) NOT NULL,
+  `RECEIPT_PRINTER` varchar(255) DEFAULT NULL,
+  `KITCHEN_PRINTER` varchar(255) DEFAULT NULL,
+  `PRWTS` smallint(6) DEFAULT NULL,
+  `PRWTP` smallint(6) DEFAULT NULL,
+  `PKWTS` smallint(6) DEFAULT NULL,
+  `PKWTP` smallint(6) DEFAULT NULL,
+  `UNPFT` smallint(6) DEFAULT NULL,
+  `UNPFK` smallint(6) DEFAULT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `printer_configuration`
+--
+
+LOCK TABLES `printer_configuration` WRITE;
+/*!40000 ALTER TABLE `printer_configuration` DISABLE KEYS */;
+/*!40000 ALTER TABLE `printer_configuration` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `restaurant`
+--
+
+DROP TABLE IF EXISTS `restaurant`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `restaurant` (
+  `ID` int(11) NOT NULL,
+  `NAME` varchar(40) DEFAULT NULL,
+  `ADDRESS_LINE1` varchar(20) DEFAULT NULL,
+  `ADDRESS_LINE2` varchar(20) DEFAULT NULL,
+  `ADDRESS_LINE3` varchar(20) DEFAULT NULL,
+  `TELEPHONE` varchar(16) DEFAULT NULL,
+  `CAPACITY` int(11) DEFAULT NULL,
+  `TABLES` int(11) DEFAULT NULL,
+  `AUTODRAWERPULLENABLE` smallint(6) DEFAULT NULL,
+  `DRAWER_PULL_HOUR` int(11) DEFAULT NULL,
+  `DRAWER_PULL_MIN` int(11) DEFAULT NULL,
+  `CNAME` varchar(20) DEFAULT NULL,
+  `CSYMBOL` varchar(10) DEFAULT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `restaurant`
+--
+
+LOCK TABLES `restaurant` WRITE;
+/*!40000 ALTER TABLE `restaurant` DISABLE KEYS */;
+INSERT INTO `restaurant` VALUES (1,'Floreant',NULL,NULL,NULL,NULL,0,0,0,0,0,'Dollar','$');
+/*!40000 ALTER TABLE `restaurant` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `restaurant_table`
+--
+
+DROP TABLE IF EXISTS `restaurant_table`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `restaurant_table` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `CAPACITY` int(11) DEFAULT NULL,
+  `NAME` varchar(60) DEFAULT NULL,
+  `BOOKED` bit(1) DEFAULT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `restaurant_table`
+--
+
+LOCK TABLES `restaurant_table` WRITE;
+/*!40000 ALTER TABLE `restaurant_table` DISABLE KEYS */;
+/*!40000 ALTER TABLE `restaurant_table` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `shift`
+--
+
+DROP TABLE IF EXISTS `shift`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `shift` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `NAME` varchar(60) NOT NULL,
+  `START_TIME` datetime DEFAULT NULL,
+  `END_TIME` datetime DEFAULT NULL,
+  `SHIFT_LEN` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`ID`),
+  UNIQUE KEY `NAME` (`NAME`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `shift`
+--
+
+LOCK TABLES `shift` WRITE;
+/*!40000 ALTER TABLE `shift` DISABLE KEYS */;
+/*!40000 ALTER TABLE `shift` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tax`
+--
+
+DROP TABLE IF EXISTS `tax`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tax` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `MODIFIED_TIME` datetime NOT NULL,
+  `NAME` varchar(20) NOT NULL,
+  `RATE` double DEFAULT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tax`
+--
+
+LOCK TABLES `tax` WRITE;
+/*!40000 ALTER TABLE `tax` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tax` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `terminal`
+--
+
+DROP TABLE IF EXISTS `terminal`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `terminal` (
+  `ID` int(11) NOT NULL,
+  `MODIFIED_TIME` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `NAME` varchar(60) DEFAULT NULL,
+  `OPENING_BALANCE` double DEFAULT NULL,
+  `CURRENT_BALANCE` double DEFAULT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `terminal`
+--
+
+LOCK TABLES `terminal` WRITE;
+/*!40000 ALTER TABLE `terminal` DISABLE KEYS */;
+INSERT INTO `terminal` VALUES (123,'2011-04-13 15:42:10','Terminal - 123',500,500);
+/*!40000 ALTER TABLE `terminal` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `ticket`
+--
+
+DROP TABLE IF EXISTS `ticket`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ticket` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `MODIFIED_TIME` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `CREATE_DATE` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `CLOSING_DATE` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `ACTIVE_DATE` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `CREATION_HOUR` int(11) DEFAULT NULL,
+  `PAID` smallint(6) DEFAULT NULL,
+  `VOIDED` smallint(6) DEFAULT NULL,
+  `VOID_REASON` varchar(255) DEFAULT NULL,
+  `WASTED` smallint(6) DEFAULT NULL,
+  `SETTLED` smallint(6) DEFAULT NULL,
+  `DRAWER_RESETTED` smallint(6) DEFAULT NULL,
+  `SUB_TOTAL` double DEFAULT NULL,
+  `TOTAL_DISCOUNT` double DEFAULT NULL,
+  `TOTAL_TAX` double DEFAULT NULL,
+  `TOTAL_PRICE` double DEFAULT NULL,
+  `PAID_AMOUNT` double DEFAULT NULL,
+  `DUE_AMOUNT` double DEFAULT NULL,
+  `TABLE_NUMBER` int(11) DEFAULT NULL,
+  `NUMBER_OF_GUESTS` int(11) DEFAULT NULL,
+  `TRANSACTION_TYPE` varchar(20) DEFAULT NULL,
+  `TRANSACTION_CODE` varchar(60) DEFAULT NULL,
+  `BAR_CODE` varchar(60) DEFAULT NULL,
+  `CARD_TYPE` varchar(60) DEFAULT NULL,
+  `CARD_NUMBER` varchar(60) DEFAULT NULL,
+  `IS_TAX_EXEMPT` smallint(6) DEFAULT NULL,
+  `IS_RE_OPENED` smallint(6) DEFAULT NULL,
+  `SHIFT_ID` int(11) DEFAULT NULL,
+  `OWNER_ID` int(11) DEFAULT NULL,
+  `GRATUITY_ID` int(11) DEFAULT NULL,
+  `VOID_BY_USER` int(11) DEFAULT NULL,
+  `TERMINAL_ID` int(11) DEFAULT NULL,
+  PRIMARY KEY (`ID`),
+  KEY `FK937B5F0C7660A5E3` (`SHIFT_ID`),
+  KEY `FK937B5F0C2AD2D031` (`TERMINAL_ID`),
+  KEY `FK937B5F0CC188EA51` (`GRATUITY_ID`),
+  KEY `FK937B5F0C1F6A9A4A` (`VOID_BY_USER`),
+  KEY `FK937B5F0CAA075D69` (`OWNER_ID`),
+  CONSTRAINT `FK937B5F0C1F6A9A4A` FOREIGN KEY (`VOID_BY_USER`) REFERENCES `users` (`AUTO_ID`),
+  CONSTRAINT `FK937B5F0C2AD2D031` FOREIGN KEY (`TERMINAL_ID`) REFERENCES `terminal` (`ID`),
+  CONSTRAINT `FK937B5F0C7660A5E3` FOREIGN KEY (`SHIFT_ID`) REFERENCES `shift` (`ID`),
+  CONSTRAINT `FK937B5F0CAA075D69` FOREIGN KEY (`OWNER_ID`) REFERENCES `users` (`AUTO_ID`),
+  CONSTRAINT `FK937B5F0CC188EA51` FOREIGN KEY (`GRATUITY_ID`) REFERENCES `gratuity` (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `ticket`
+--
+
+LOCK TABLES `ticket` WRITE;
+/*!40000 ALTER TABLE `ticket` DISABLE KEYS */;
+/*!40000 ALTER TABLE `ticket` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `ticket_cooking_instruction`
+--
+
+DROP TABLE IF EXISTS `ticket_cooking_instruction`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ticket_cooking_instruction` (
+  `TICKET_ID` int(11) NOT NULL,
+  `description` varchar(60) DEFAULT NULL,
+  `printedToKitchen` smallint(6) DEFAULT NULL,
+  KEY `FKD2C835761DF2D7F1` (`TICKET_ID`),
+  CONSTRAINT `FKD2C835761DF2D7F1` FOREIGN KEY (`TICKET_ID`) REFERENCES `ticket` (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `ticket_cooking_instruction`
+--
+
+LOCK TABLES `ticket_cooking_instruction` WRITE;
+/*!40000 ALTER TABLE `ticket_cooking_instruction` DISABLE KEYS */;
+/*!40000 ALTER TABLE `ticket_cooking_instruction` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `ticket_coupon_discount`
+--
+
+DROP TABLE IF EXISTS `ticket_coupon_discount`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ticket_coupon_discount` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `COUPON_DISCOUNT_ID` int(11) DEFAULT NULL,
+  `NAME` varchar(30) DEFAULT NULL,
+  `TYPE` int(11) DEFAULT NULL,
+  `VALUE` double DEFAULT NULL,
+  `TICKET_ID` int(11) DEFAULT NULL,
+  `D_ORDER` int(11) DEFAULT NULL,
+  PRIMARY KEY (`ID`),
+  KEY `FK3A1F32071DF2D7F1` (`TICKET_ID`),
+  CONSTRAINT `FK3A1F32071DF2D7F1` FOREIGN KEY (`TICKET_ID`) REFERENCES `ticket` (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `ticket_coupon_discount`
+--
+
+LOCK TABLES `ticket_coupon_discount` WRITE;
+/*!40000 ALTER TABLE `ticket_coupon_discount` DISABLE KEYS */;
+/*!40000 ALTER TABLE `ticket_coupon_discount` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `ticket_item`
+--
+
+DROP TABLE IF EXISTS `ticket_item`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ticket_item` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `MODIFIED_TIME` datetime NOT NULL,
+  `ITEM_ID` int(11) DEFAULT NULL,
+  `ITEM_COUNT` int(11) DEFAULT NULL,
+  `ITEM_NAME` varchar(30) DEFAULT NULL,
+  `GROUP_NAME` varchar(20) DEFAULT NULL,
+  `CATEGORY_NAME` varchar(20) DEFAULT NULL,
+  `ITEM_PRICE` double DEFAULT NULL,
+  `DISCOUNT_RATE` double DEFAULT NULL,
+  `ITEM_TAX_RATE` double DEFAULT NULL,
+  `SUB_TOTAL` double DEFAULT NULL,
+  `SUB_TOTAL_WITH_MODIFIERS` double DEFAULT NULL,
+  `DISCOUNT` double DEFAULT NULL,
+  `TAX_AMOUNT` double DEFAULT NULL,
+  `TAX_AMOUNT_WITH_MODIFIERS` double DEFAULT NULL,
+  `TOTAL_PRICE` double DEFAULT NULL,
+  `TOTAL_PRICE_WITH_MODIFIERS` double DEFAULT NULL,
+  `BEVERAGE` bit(1) DEFAULT NULL,
+  `PRINT_TO_KITCHEN` bit(1) DEFAULT NULL,
+  `HAS_MODIIERS` bit(1) DEFAULT NULL,
+  `PRINTED_TO_KITCHEN` bit(1) DEFAULT NULL,
+  `TICKET_ID` int(11) DEFAULT NULL,
+  `ITEM_ORDER` int(11) DEFAULT NULL,
+  PRIMARY KEY (`ID`),
+  KEY `FK979F54661DF2D7F1` (`TICKET_ID`),
+  CONSTRAINT `FK979F54661DF2D7F1` FOREIGN KEY (`TICKET_ID`) REFERENCES `ticket` (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `ticket_item`
+--
+
+LOCK TABLES `ticket_item` WRITE;
+/*!40000 ALTER TABLE `ticket_item` DISABLE KEYS */;
+/*!40000 ALTER TABLE `ticket_item` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `ticket_item_modifier`
+--
+
+DROP TABLE IF EXISTS `ticket_item_modifier`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ticket_item_modifier` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `ITEM_ID` int(11) DEFAULT NULL,
+  `GROUP_ID` int(11) DEFAULT NULL,
+  `ITEM_COUNT` int(11) DEFAULT NULL,
+  `MODIFIER_NAME` varchar(30) DEFAULT NULL,
+  `MODIFIER_PRICE` double DEFAULT NULL,
+  `EXTRA_PRICE` double DEFAULT NULL,
+  `MODIFIER_TAX_RATE` double DEFAULT NULL,
+  `MODIFIER_TYPE` int(11) DEFAULT NULL,
+  `TOTAL_PRICE` double DEFAULT NULL,
+  `PRINT_TO_KITCHEN` bit(1) DEFAULT NULL,
+  `PRINTED_TO_KITCHEN` bit(1) DEFAULT NULL,
+  `ModifierGroup_ID` int(11) DEFAULT NULL,
+  `TICKETITEMMODIFIERGROUP_ID` int(11) DEFAULT NULL,
+  `ITEM_ORDER` int(11) DEFAULT NULL,
+  PRIMARY KEY (`ID`),
+  KEY `FK8FD6290C04D31C4` (`ModifierGroup_ID`),
+  KEY `FK8FD6290267493E3` (`TICKETITEMMODIFIERGROUP_ID`),
+  CONSTRAINT `FK8FD6290267493E3` FOREIGN KEY (`TICKETITEMMODIFIERGROUP_ID`) REFERENCES `ticketitem_modifiergroup` (`ID`),
+  CONSTRAINT `FK8FD6290C04D31C4` FOREIGN KEY (`ModifierGroup_ID`) REFERENCES `ticketitem_modifiergroup` (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `ticket_item_modifier`
+--
+
+LOCK TABLES `ticket_item_modifier` WRITE;
+/*!40000 ALTER TABLE `ticket_item_modifier` DISABLE KEYS */;
+/*!40000 ALTER TABLE `ticket_item_modifier` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `ticketitem_modifiergroup`
+--
+
+DROP TABLE IF EXISTS `ticketitem_modifiergroup`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ticketitem_modifiergroup` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `MODIFIED_TIME` datetime NOT NULL,
+  `GROUP_ID` int(11) DEFAULT NULL,
+  `MIN_QUANTITY` int(11) DEFAULT NULL,
+  `MAX_QUANTITY` int(11) DEFAULT NULL,
+  `parent` int(11) DEFAULT NULL,
+  `TICKETITEM_ID` int(11) DEFAULT NULL,
+  `ITEM_ORDER` int(11) DEFAULT NULL,
+  PRIMARY KEY (`ID`),
+  KEY `FK21D455C8DC1B1BB1` (`TICKETITEM_ID`),
+  KEY `FK21D455C8A73C1B20` (`parent`),
+  CONSTRAINT `FK21D455C8A73C1B20` FOREIGN KEY (`parent`) REFERENCES `ticket_item` (`ID`),
+  CONSTRAINT `FK21D455C8DC1B1BB1` FOREIGN KEY (`TICKETITEM_ID`) REFERENCES `ticket_item` (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `ticketitem_modifiergroup`
+--
+
+LOCK TABLES `ticketitem_modifiergroup` WRITE;
+/*!40000 ALTER TABLE `ticketitem_modifiergroup` DISABLE KEYS */;
+/*!40000 ALTER TABLE `ticketitem_modifiergroup` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `transactions`
+--
+
+DROP TABLE IF EXISTS `transactions`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `transactions` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `PAYMENT_TYPE` varchar(20) NOT NULL,
+  `MODIFIED_TIME` datetime NOT NULL,
+  `TRANSACTION_TIME` datetime DEFAULT NULL,
+  `SUB_TOTAL` double DEFAULT NULL,
+  `TOTAL_DISCOUNT` double DEFAULT NULL,
+  `TOTAL_TAX` double DEFAULT NULL,
+  `TOTAL_PRICE` double DEFAULT NULL,
+  `GRATUITY_AMOUNT` double DEFAULT NULL,
+  `DRAWER_RESETTED` bit(1) DEFAULT NULL,
+  `TERMINAL_ID` int(11) DEFAULT NULL,
+  `TICKET_ID` int(11) DEFAULT NULL,
+  `USER_ID` int(11) DEFAULT NULL,
+  `FACE_VALUE` double DEFAULT NULL,
+  `PAID_AMOUNT` double DEFAULT NULL,
+  `CASH_BACK_AMOUNT` double DEFAULT NULL,
+  `CARD_NUMBER` varchar(30) DEFAULT NULL,
+  `CARD_TYPE` varchar(30) DEFAULT NULL,
+  `note` varchar(255) DEFAULT NULL,
+  `REASON_ID` int(11) DEFAULT NULL,
+  `RECEPIENT_ID` int(11) DEFAULT NULL,
+  PRIMARY KEY (`ID`),
+  KEY `FKFE98715570BE7CF7` (`REASON_ID`),
+  KEY `FKFE9871552AD2D031` (`TERMINAL_ID`),
+  KEY `FKFE9871551DF2D7F1` (`TICKET_ID`),
+  KEY `FKFE9871553E20AD51` (`USER_ID`),
+  KEY `FKFE987155B00959BD` (`RECEPIENT_ID`),
+  CONSTRAINT `FKFE9871551DF2D7F1` FOREIGN KEY (`TICKET_ID`) REFERENCES `ticket` (`ID`),
+  CONSTRAINT `FKFE9871552AD2D031` FOREIGN KEY (`TERMINAL_ID`) REFERENCES `terminal` (`ID`),
+  CONSTRAINT `FKFE9871553E20AD51` FOREIGN KEY (`USER_ID`) REFERENCES `users` (`AUTO_ID`),
+  CONSTRAINT `FKFE98715570BE7CF7` FOREIGN KEY (`REASON_ID`) REFERENCES `payout_reasons` (`ID`),
+  CONSTRAINT `FKFE987155B00959BD` FOREIGN KEY (`RECEPIENT_ID`) REFERENCES `payout_recepients` (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `transactions`
+--
+
+LOCK TABLES `transactions` WRITE;
+/*!40000 ALTER TABLE `transactions` DISABLE KEYS */;
+/*!40000 ALTER TABLE `transactions` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `user_permission`
+--
+
+DROP TABLE IF EXISTS `user_permission`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `user_permission` (
+  `NAME` varchar(40) NOT NULL,
+  PRIMARY KEY (`NAME`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `user_permission`
+--
+
+LOCK TABLES `user_permission` WRITE;
+/*!40000 ALTER TABLE `user_permission` DISABLE KEYS */;
+INSERT INTO `user_permission` VALUES ('Create New Ticket'),('Edit Ticket'),('Pay Out'),('Perform Administrative Task'),('Perform Manager Task'),('Reopen Ticket'),('Settle Ticket'),('Split Ticket'),('Take Out'),('View All Open Ticket'),('View Back Office'),('View Explorers'),('View Reports'),('Void Ticket');
+/*!40000 ALTER TABLE `user_permission` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `user_type`
+--
+
+DROP TABLE IF EXISTS `user_type`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `user_type` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `P_NAME` varchar(60) DEFAULT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `user_type`
+--
+
+LOCK TABLES `user_type` WRITE;
+/*!40000 ALTER TABLE `user_type` DISABLE KEYS */;
+INSERT INTO `user_type` VALUES (1,'Administrator');
+/*!40000 ALTER TABLE `user_type` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `user_user_permission`
+--
+
+DROP TABLE IF EXISTS `user_user_permission`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `user_user_permission` (
+  `permissionId` int(11) NOT NULL,
+  `elt` varchar(40) NOT NULL,
+  PRIMARY KEY (`permissionId`,`elt`),
+  KEY `FK2DBEAA4F283ECC6` (`permissionId`),
+  KEY `FK2DBEAA4F8F23F5E` (`elt`),
+  CONSTRAINT `FK2DBEAA4F283ECC6` FOREIGN KEY (`permissionId`) REFERENCES `user_type` (`ID`),
+  CONSTRAINT `FK2DBEAA4F8F23F5E` FOREIGN KEY (`elt`) REFERENCES `user_permission` (`NAME`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `user_user_permission`
+--
+
+LOCK TABLES `user_user_permission` WRITE;
+/*!40000 ALTER TABLE `user_user_permission` DISABLE KEYS */;
+INSERT INTO `user_user_permission` VALUES (1,'Create New Ticket'),(1,'Edit Ticket'),(1,'Pay Out'),(1,'Perform Administrative Task'),(1,'Perform Manager Task'),(1,'Reopen Ticket'),(1,'Settle Ticket'),(1,'Split Ticket'),(1,'Take Out'),(1,'View All Open Ticket'),(1,'View Back Office'),(1,'View Explorers'),(1,'View Reports'),(1,'Void Ticket');
+/*!40000 ALTER TABLE `user_user_permission` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `users`
+--
+
+DROP TABLE IF EXISTS `users`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `users` (
+  `AUTO_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `MODIFIED_TIME` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `USER_ID` int(11) DEFAULT NULL,
+  `USER_PASS` varchar(16) NOT NULL,
+  `FIRST_NAME` varchar(30) DEFAULT NULL,
+  `LAST_NAME` varchar(30) DEFAULT NULL,
+  `SSN` varchar(30) NOT NULL,
+  `COST_PER_HOUR` double DEFAULT NULL,
+  `CLOCKED_IN` smallint(6) DEFAULT NULL,
+  `LAST_CLOCK_IN_TIME` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `SHIFT_ID` int(11) DEFAULT NULL,
+  `CURRENTTERMINAL` int(11) DEFAULT NULL,
+  `N_USER_TYPE` int(11) DEFAULT NULL,
+  PRIMARY KEY (`AUTO_ID`),
+  KEY `FK4D495E8D9409968` (`CURRENTTERMINAL`),
+  KEY `FK4D495E8897B1E39` (`N_USER_TYPE`),
+  CONSTRAINT `FK4D495E8897B1E39` FOREIGN KEY (`N_USER_TYPE`) REFERENCES `user_type` (`ID`),
+  CONSTRAINT `FK4D495E8D9409968` FOREIGN KEY (`CURRENTTERMINAL`) REFERENCES `terminal` (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `users`
+--
+
+LOCK TABLES `users` WRITE;
+/*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT INTO `users` VALUES (1,'2011-04-14 17:28:53',123,'123','Test','User','123',0,1,'0000-00-00 00:00:00',1,123,1);
+/*!40000 ALTER TABLE `users` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `void_reasons`
+--
+
+DROP TABLE IF EXISTS `void_reasons`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `void_reasons` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `REASON_TEXT` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `void_reasons`
+--
+
+LOCK TABLES `void_reasons` WRITE;
+/*!40000 ALTER TABLE `void_reasons` DISABLE KEYS */;
+/*!40000 ALTER TABLE `void_reasons` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `voidtickets`
+--
+
+DROP TABLE IF EXISTS `voidtickets`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `voidtickets` (
+  `DPREPORT_ID` int(11) NOT NULL,
+  `code` int(11) DEFAULT NULL,
+  `reason` varchar(255) DEFAULT NULL,
+  `hast` varchar(255) DEFAULT NULL,
+  `quantity` int(11) DEFAULT NULL,
+  `amount` double DEFAULT NULL,
+  KEY `FK5A70EB33EF4CD9B` (`DPREPORT_ID`),
+  CONSTRAINT `FK5A70EB33EF4CD9B` FOREIGN KEY (`DPREPORT_ID`) REFERENCES `drawer_pull_report` (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `voidtickets`
+--
+
+LOCK TABLES `voidtickets` WRITE;
+/*!40000 ALTER TABLE `voidtickets` DISABLE KEYS */;
+/*!40000 ALTER TABLE `voidtickets` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2011-04-21 13:44:16
