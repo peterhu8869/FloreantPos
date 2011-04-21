@@ -50,6 +50,8 @@ public class UserForm extends BeanEditor {
 		jLabel2 = new javax.swing.JLabel();
 		jLabel3 = new javax.swing.JLabel();
 		jLabel4 = new javax.swing.JLabel();
+		jLabel5 = new javax.swing.JLabel();
+		jLabel6 = new javax.swing.JLabel();
 		jLabel9 = new javax.swing.JLabel();
 		jLabel10 = new javax.swing.JLabel();
 		tfPassword1 = new javax.swing.JPasswordField();
@@ -58,9 +60,8 @@ public class UserForm extends BeanEditor {
 		tfSsn = new javax.swing.JTextField();
 		tfFirstName = new javax.swing.JTextField();
 		tfLastName = new javax.swing.JTextField();
-		jLabel5 = new javax.swing.JLabel();
+		
 		tfCostPerHour = new javax.swing.JTextField();
-		jLabel6 = new javax.swing.JLabel();
 		cbUserType = new javax.swing.JComboBox();
 
 		setLayout(new java.awt.GridBagLayout());

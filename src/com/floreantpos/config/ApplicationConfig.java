@@ -111,6 +111,8 @@ public class ApplicationConfig {
 		}
 	}
 	public static boolean checkDatabaseConnection() {
+		//Debugging Purposes
+		System.out.println(checkDatabaseConnection(getDatabaseURL(), getDatabasePort(), getDatabaseName(), getDatabaseUser(), getDatabasePassword()));
 		return checkDatabaseConnection(getDatabaseURL(), getDatabasePort(), getDatabaseName(), getDatabaseUser(), getDatabasePassword());
 	}
 }
