@@ -144,10 +144,9 @@ public class DatabaseConfigurationDialog extends POSDialog implements ActionList
 		}
 		else if(CLOSE.equalsIgnoreCase(command)) {
 			if(exitOnClose) {
-				POSMessageDialog.showError("Database connection error, application will now exit.");
-				System.exit(1);
-			}
-			else {
+				//Commented out by [Peter Hu]
+				//POSMessageDialog.showError("Database connection error, application will now exit.");
+				//System.exit(1);
 				dispose();
 			}
 		}
